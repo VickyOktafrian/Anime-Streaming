@@ -1,68 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
 
 <!-- Hero Section Begin -->
 <section class="hero" style="margin-top: -70px">
     <div class="container">
         <div class="hero__slider owl-carousel">
-            <div class="hero__items set-bg" data-setbg="{{ asset('assets/img/hero/hero-1.jpg') }}">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero__text">
-                            <div class="label">Adventure</div>
-                            <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                            <p>After 30 days of travel across the world...</p>
-                            <a href="anime-watching.html"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+            @foreach ($shows as $show)
+                <div class="hero__items set-bg" data-setbg="{{ asset('assets/img/hero/' . $show->image) }}">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="hero__text">
+                                <div class="label">{{ $show->genre }}</div>
+                                <h2>{{ $show->name }}</h2>
+                                <p>{{ Str::limit($show->description, 20) }}</p>
+                                <a href="anime-details/{{ $show->id }}"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="hero__items set-bg" data-setbg="{{ asset('assets/img/hero/hero-1.jpg') }}">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero__text">
-                            <div class="label">Adventure</div>
-                            <a href="anime-details.html"><h2>Fate / Stay Night: Unlimited Blade Works</h2></a>
-                            <p>After 30 days of travel across the world...</p>
-                            <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero__items set-bg" data-setbg="{{ asset('assets/img/hero/hero-1.jpg') }}">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="hero__text">
-                            <div class="label">Adventure</div>
-                            <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                            <p>After 30 days of travel across the world...</p>
-                            <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
+</section>
+
+
      <!-- Product Section Begin -->
      <section class="product spad">
         <div class="container">
