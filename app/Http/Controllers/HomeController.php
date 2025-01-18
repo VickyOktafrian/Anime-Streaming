@@ -25,6 +25,12 @@ class HomeController extends Controller
     public function index()
     {
         $shows = Show::select()->orderBy('id','desc')->take(4)->get();
-        return view('home',compact('shows'));
+        $trendingShow= Show::select()->orderBy('name','desc')->take(6)->get();
+        $adventureShow = Show::select()->orderBy('name','desc')->where('genre','Adventure')->take(7)->get();$recentShow = Show::select()->orderBy('id','desc')->take(6)->get();
+        $liveShow = Show::select()->orderBy('name','desc')->where('genre','Action')->take(4)->get();
+        $foryouShow =Show::select()->orderBy('id','desc')->take(4)->get(); 
+
+
+        return view('home',compact('shows','trendingShow','adventureShow','recentShow','liveShow','foryouShow'));
     }
 }
