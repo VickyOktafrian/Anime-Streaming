@@ -25,8 +25,8 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg" data-setbg="{{ asset('assets/img/anime/'.$show->image) }}">
-                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            <div class="comment"><i class="fa fa-comments"></i> {{ $totalComments }}</div>
+                            <div class="view"><i class="fa fa-eye"></i> {{ $views }}</div>
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -52,15 +52,27 @@
 
                                             <li><span>Duration:</span> {{ $show->duration }} min/ep</li>
                                             <li><span>Quality:</span> {{ $show->quality }}</li>
-                                            <li><span>Views:</span> 131,541</li>
+                                            <li><span>Views:</span> {{ $views }}</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="anime__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Follow</a>
-                                <a href="anime-watching.html" class="watch-btn"><span>Watch Now</span> <i
-                                    class="fa fa-angle-right"></i></a>
+                                @if ($validateFollowing >0)
+                                <button  disabled class="follow-btn"><i class="fa fa-heart-o"></i> Already Followed</button>
+
+                                
+                                @else
+                                <form action="{{ route('anime.follow',$show->id) }}" method="post">
+                                @csrf
+                                <button  type='submit' class="follow-btn"><i class="fa fa-heart-o"></i> Follow</button>
+                            </form>
+                            @endif
+                            <form action="{{ route('anime.view',$show->id) }}" method="post">
+                                @csrf
+                                <button type="submit" class="watch-btn"><span>Watch Now</span> <i
+                                    class="fa fa-angle-right"></i></button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -90,8 +102,9 @@
                             <div class="section-title">
                                 <h5>Your Comment</h5>
                             </div>
-                            <form action="#">
-                                <textarea placeholder="Your Comment"></textarea>
+                            <form method="post" action="{{ route('anime.insert.comments', $show->id)  }}">
+                                @csrf
+                                <textarea name="comment" placeholder="Your Comment"></textarea>
                                 <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
                             </form>
                         </div>
