@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use App\Models\Show\Show;
 use App\Models\Comment\Comment;
 use App\Models\User;
+use App\Models\Episode\Episode;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Faker\Factory as Faker;
@@ -40,6 +41,16 @@ class DatabaseSeeder extends Seeder
                 'duration' => $faker->numberBetween(20, 120) . ' min',  // Durasi acak dalam menit
                 'quality' => $faker->randomElement(['HD', 'SD', '4K']),  // Random quality
             ]);
+
+            // Menambahkan episode untuk setiap Show
+            foreach (range(1, 10) as $episodeIndex) {
+                Episode::create([
+                    'show_id' => $show->id,  // ID Show terkait
+                    'episode_name' => 'Episode ' . $episodeIndex,  // Nama episode berdasarkan index
+                    'video' => $faker->url,  // URL video acak
+                    'thumbnail' => $faker->imageUrl(320, 180, 'episodes', true, 'Episode'),  // Thumbnail acak
+                ]);
+            }
 
             // Menambahkan komentar untuk setiap Show
             foreach (range(1, 5) as $commentIndex) {

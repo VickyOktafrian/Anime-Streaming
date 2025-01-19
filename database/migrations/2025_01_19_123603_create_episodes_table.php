@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('episodes', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('show_id');
+            $table->string('episode_name');
+            $table->string('video');
+            $table->string('thumbnail');
             $table->timestamps();
         });
     }

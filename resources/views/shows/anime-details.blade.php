@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
                         <a href="./categories.html">Categories</a>
                         <span>{{ $show->type }}</span>
                     </div>
@@ -70,8 +70,8 @@
                             @endif
                             <form action="{{ route('anime.view',$show->id) }}" method="post">
                                 @csrf
-                                <button type="submit" class="watch-btn"><span>Watch Now</span> <i
-                                    class="fa fa-angle-right"></i></button>
+                                <a  class="watch-btn" href="{{ route('anime.watch',['show_id'=>$show->id,'episode_id' => $firstEpisode->id]) }}"><span>Watch Now</span> <i
+                                    class="fa fa-angle-right"></i></a>
                                     </form>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                                 
                             <div class="product__sidebar__view__item set-bg border border-white" data-setbg="{{ asset('assets/img/sidebar/'.$show->image) }}">
                                 <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                <div class="view"><i class="fa fa-eye"></i> {{ $views }}</div>
                                 <h5><a href="{{ route('anime.details',$show->id) }}">{{ $show->name }}</a></h5>
                             </div>
                             @endforeach

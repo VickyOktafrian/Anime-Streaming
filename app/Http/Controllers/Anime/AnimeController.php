@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Anime;
 
+use App\Models\Episode\Episode;
 use App\Models\Following\Following;
 use App\Models\Show\Show;
 use Illuminate\Http\Request;
@@ -20,8 +21,10 @@ class AnimeController extends Controller
         $validateFollowing = Following::where('user_id',Auth::user()->id)->where('show_id',$id)->count();
         $views = View::where('show_id',$id)->count();
         $totalComments = Comment::where('show_id',$id)->count();
+        $firstEpisode = Episode::where('show_id', $id)->orderBy('id', 'asc')->first(); // Ambil episode pertama
 
-        return view('shows.anime-details', compact('show','randomShows','comments','validateFollowing','views','totalComments'));
+
+        return view('shows.anime-details', compact('show','randomShows','comments','validateFollowing','views','totalComments','firstEpisode'));
     }
 
     public function insertComments(Request  $request, $id){
@@ -76,6 +79,13 @@ class AnimeController extends Controller
     }
 
     return Redirect::back()->with('error', 'Failed to record view');
+}
+
+public function animeWatch($show_id,$episode_id){
+    $show = Show::find($show_id);
+    $episode = Episode::find($episode_id);
+    $episodes = Episode::select()->where('show_id',$show_id)->get();
+    return view('shows.anime-watch',compact('show','episode','episodes'));
 }
 
 }
