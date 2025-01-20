@@ -18,4 +18,6 @@ Route::post('shows/insert-comments/{id}', [App\Http\Controllers\Anime\AnimeContr
 Route::post('shows/follows/{id}', [App\Http\Controllers\Anime\AnimeController::class, 'follow'])->name('anime.follow');
 Route::post('shows/views/{id}', [App\Http\Controllers\Anime\AnimeController::class, 'view'])->name('anime.view');
 
-Route::get('shows/anime-watching/{show_id}/{episode_id}', [App\Http\Controllers\Anime\AnimeController::class, 'animeWatch'])->name('anime.watch');
+Route::get('shows/anime-watching/{show_id}/{episode_name}', [App\Http\Controllers\Anime\AnimeController::class, 'animeWatch'])->name('anime.watch');
+
+Route::get('shows/category/{category_name}', [App\Http\Controllers\Anime\AnimeController::class, 'category'])->name('anime.category');

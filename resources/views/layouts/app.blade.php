@@ -49,12 +49,12 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li class="active"><a href="{{ route('home') }}">Homepage</a></li>
-                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
+                                <li>
+                                    <a href="#">Categories <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
-                                        <li><a href="./categories.html">Romance</a></li>
-                                        <li><a href="./categories.html">Adventure </a></li>
-                                        <li><a href="./categories.html">Magic</a></li>
-                                        <li><a href="./categories.html">Fantasy</a></li>
+                                        @foreach ($categories as $item)
+                                            <li><a href="{{ route('anime.category', $item->name) }}">{{ $item->name }}</a></li>
+                                        @endforeach
                                     </ul>
                                 </li>
                             </ul>
@@ -131,7 +131,7 @@
                 <div class="footer__nav">
                     <ul>
                         <li class="active"><a href="{{ route('home') }}">Homepage</a></li>
-                        <li><a href="./categories.html">Categories</a></li>
+                        <li><a href="{{ route('anime.category', $item->name) }}">{{ $item->name }}</a></li>
                     </ul>
                 </div>
             </div>

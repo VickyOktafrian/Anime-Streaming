@@ -70,7 +70,7 @@
                             @endif
                             <form action="{{ route('anime.view',$show->id) }}" method="post">
                                 @csrf
-                                <a  class="watch-btn" href="{{ route('anime.watch',['show_id'=>$show->id,'episode_id' => $firstEpisode->id]) }}"><span>Watch Now</span> <i
+                                <a  class="watch-btn" href="{{ route('anime.watch', ['show_id' => $show->id, 'episode_name' => $firstEpisode->episode_name]) }}"><span>Watch Now</span> <i
                                     class="fa fa-angle-right"></i></a>
                                     </form>
                                 </div>

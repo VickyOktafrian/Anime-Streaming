@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Anime;
 
+use App\Models\Category\Category;
 use App\Models\Episode\Episode;
 use App\Models\Following\Following;
 use App\Models\Show\Show;
@@ -81,11 +82,32 @@ class AnimeController extends Controller
     return Redirect::back()->with('error', 'Failed to record view');
 }
 
-public function animeWatch($show_id,$episode_id){
+public function animeWatch($show_id,$episode_name){
     $show = Show::find($show_id);
-    $episode = Episode::find($episode_id);
-    $episodes = Episode::select()->where('show_id',$show_id)->get();
-    return view('shows.anime-watch',compact('show','episode','episodes'));
+    $episode = Episode::where('episode_name', $episode_name)
+        ->where('show_id', $show_id)
+        ->firstOrFail();
+    $episodes = Episode::select()->where('show_id',operator: $show_id)->get();
+    $comments = Comment::select()->orderBy('id','desc')->take(8)->where('show_id',$show_id)->get();
+
+
+    return view('shows.anime-watch',compact('show','episode','episodes','comments'));
 }
+
+public function category($category_name)
+{
+    // Get the category by its name
+    $category = Category::where('name', $category_name)->firstOrFail();
+
+    // Get the shows related to this category (by genre)
+    $shows = Show::where('genre', $category_name)->get();
+
+    // Get the 'For You' shows (latest 4 shows)
+    $foryouShow = Show::orderBy('id', 'desc')->take(4)->get();
+
+    // Pass the category, shows, and 'For You' shows to the view
+    return view('shows.category', compact('category', 'shows', 'foryouShow'));
+}
+
 
 }

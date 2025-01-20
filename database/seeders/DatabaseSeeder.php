@@ -1,13 +1,14 @@
 <?php
 namespace Database\Seeders;
 
-use App\Models\Show\Show;
-use App\Models\Comment\Comment;
 use App\Models\User;
+use App\Models\Show\Show;
+use Faker\Factory as Faker;
+use App\Models\Comment\Comment;
 use App\Models\Episode\Episode;
 use Illuminate\Database\Seeder;
+use App\Models\Category\Category;
 use Illuminate\Support\Facades\Hash;
-use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -63,6 +64,15 @@ class DatabaseSeeder extends Seeder
                     'comment' => $faker->sentence(10),  // Komentar acak
                 ]);
             }
+        }
+        $categories = [
+            'Action', 'Adventure', 'Comedy', 'Drama', 'Fantasy', 'Horror'
+        ];
+
+        foreach ($categories as $category) {
+            Category::create([
+                'name' => $category,
+            ]);
         }
     }
 }
