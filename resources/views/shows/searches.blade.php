@@ -9,7 +9,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="{{ route('home') }}"><i class="fa fa-home"></i> Home</a>
-                        <span>{{ $category->name }}</span>  <!-- Fixed this to show category name -->
+                        <span>Searches</span>  <!-- Fixed this to show category name -->
                     </div>
                 </div>
             </div>
@@ -27,14 +27,14 @@
                             <div class="row">
                                     <div class="col-lg-8 col-md-8 col-sm-6">
                                         <div class="section-title">
-                                            <h4>{{ $category->name }}</h4>  <!-- Fixed this to show category name -->
+                                            <h4>Searches</h4> 
                                         </div>
                                     </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            @foreach ($shows as $item)
+                            @foreach ($searches as $item)
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div class="product__item border border-white">
                                         <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/popular/'.$item->image) }}">

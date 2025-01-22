@@ -58,6 +58,8 @@ class AnimeController extends Controller
         $follow = Following::create([
             'show_id' => $id,
             'user_id' => Auth::id(),
+            'show_image'=> $request->show_image,
+            'show_name'=> $request->show_name
         ]);
     
         if ($follow) {
@@ -107,6 +109,16 @@ public function category($category_name)
 
     // Pass the category, shows, and 'For You' shows to the view
     return view('shows.category', compact('category', 'shows', 'foryouShow'));
+}
+public function searchShows(Request $request)
+{
+   $show = $request->get('show');
+   $searches = Show::where('name','like',"%$show%")->get();
+   $foryouShow = Show::orderBy('id', 'desc')->take(4)->get();
+
+
+    // Pass the category, shows, and 'For You' shows to the view
+    return view('shows.searches', compact('searches','foryouShow'));
 }
 
 

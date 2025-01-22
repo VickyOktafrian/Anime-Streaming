@@ -86,6 +86,9 @@
                                     {{-- <a class="dropdown-item" href="{{ route('profile.show') }}">
                                         {{ __('Profile') }}
                                     </a> --}}
+                                    <a class="dropdown-item" href="{{ route('users.followed.shows') }}"
+                                      > Your Followed Shows
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -98,6 +101,12 @@
                         @endguest
                         
                         </ul>
+                       
+                        <form method='post' action="{{ route('anime.search.shows') }}" class="form-inline my-2 my-lg-0">
+                            @csrf
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='show'>
+                          </form>
+                          
                         {{-- <a href="#" class="search-switch"><span class="icon_search"></span></a> --}}
                         {{-- <a href="./login.html"><span class="icon_profile"></span></a> --}}
                     </div>

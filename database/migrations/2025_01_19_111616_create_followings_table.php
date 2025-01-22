@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('followings', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
+            $table->string('show_image');
+            $table->string('show_name');
             $table->bigInteger('show_id');
 
             

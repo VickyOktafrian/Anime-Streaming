@@ -21,3 +21,7 @@ Route::post('shows/views/{id}', [App\Http\Controllers\Anime\AnimeController::cla
 Route::get('shows/anime-watching/{show_id}/{episode_name}', [App\Http\Controllers\Anime\AnimeController::class, 'animeWatch'])->name('anime.watch');
 
 Route::get('shows/category/{category_name}', [App\Http\Controllers\Anime\AnimeController::class, 'category'])->name('anime.category');
+
+Route::get('users/followed-shows', [App\Http\Controllers\Users\UsersController::class, 'followedShows'])->name('users.followed.shows');
+
+Route::any('shows/search', [App\Http\Controllers\Anime\AnimeController::class, 'searchShows'])->name('anime.search.shows');

@@ -24,7 +24,7 @@
             <div class="anime__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg" data-setbg="{{ asset('assets/img/anime/'.$show->image) }}">
+                        <div class="border border-white anime__details__pic set-bg" data-setbg="{{ asset('assets/img/anime/'.$show->image) }}">
                             <div class="comment"><i class="fa fa-comments"></i> {{ $totalComments }}</div>
                             <div class="view"><i class="fa fa-eye"></i> {{ $views }}</div>
                         </div>
@@ -65,6 +65,8 @@
                                 @else
                                 <form action="{{ route('anime.follow',$show->id) }}" method="post">
                                 @csrf
+                                <input name='show_image' value="{{ $show->image }}" type="hidden">
+                                <input name='show_name' value="{{ $show->name }}" type="hidden">
                                 <button  type='submit' class="follow-btn"><i class="fa fa-heart-o"></i> Follow</button>
                             </form>
                             @endif

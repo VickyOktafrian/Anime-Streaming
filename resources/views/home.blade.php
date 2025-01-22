@@ -3,9 +3,9 @@
 @section('content')
 
 <!-- Hero Section Begin -->
-<section class="hero" style="margin-top: -70px">
+<section class="hero"  style="background-color: #0b0c2a; margin-top: -25px;">
     <div class="container">
-        <div class="hero__slider owl-carousel">
+        <div class="hero__slider owl-carousel border border-white">
             @foreach ($shows as $show)
                 <div class="hero__items set-bg" data-setbg="{{ asset('assets/img/hero/' . $show->image) }}">
                     <div class="row">
@@ -26,7 +26,7 @@
 <!-- Hero Section End -->
 
 <!-- Product Section Begin -->
-<section class="product spad">
+<section class="product spad"  style="background-color: #0b0c2a; ">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
