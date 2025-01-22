@@ -19,28 +19,31 @@ class AnimeController extends Controller
         $show = Show::find($id);
         $randomShows = Show::select()->orderBy('id','desc')->take(5)->where('id','!=',$id)->get();
         $comments = Comment::select()->orderBy('id','desc')->take(8)->where('show_id',$id)->get();
-        $validateFollowing = Following::where('user_id',Auth::user()->id)->where('show_id',$id)->count();
-        $views = View::where('show_id',$id)->count();
-        $totalComments = Comment::where('show_id',$id)->count();
+        $views = View::where('show_id', $id)->count();
+        $totalComments = Comment::where('show_id', $id)->count();
         $firstEpisode = Episode::where('show_id', $id)->orderBy('id', 'asc')->first(); // Ambil episode pertama
-
-
-        return view('shows.anime-details', compact('show','randomShows','comments','validateFollowing','views','totalComments','firstEpisode'));
+    
+        // Validasi jika user login
+        $validateFollowing = Auth::check() 
+            ? Following::where('user_id', Auth::id())->where('show_id', $id)->count() 
+            : 0;
+    
+        return view('shows.anime-details', compact('show', 'randomShows', 'comments', 'validateFollowing', 'views', 'totalComments', 'firstEpisode'));
     }
-
-    public function insertComments(Request  $request, $id){
-        
-        $insertComments = Comment::create([
-            "show_id"=>   $id,
-            "user_name"=>Auth::user()->name,
-            "image"=>Auth::user()->image,
-            "comment"=> $request->comment
-        ]);
-        if($insertComments){
-            return Redirect::route('anime.details',$id)->with('success','Comment added Successfully');
+    public function insertComments(Request $request, $id){
+        if (!Auth::check()) {
+            return Redirect::route('anime.details', $id)->with('error', 'You need to log in to comment.');
         }
-
- 
+    
+        $insertComments = Comment::create([
+            "show_id" => $id,
+            "user_name" => Auth::user()->name,
+            "image" => Auth::user()->image,
+            "comment" => $request->comment
+        ]);
+        if ($insertComments) {
+            return Redirect::route('anime.details', $id)->with('success', 'Comment added successfully.');
+        }
     }
     
     public function follow(Request $request, $id)
@@ -70,30 +73,33 @@ class AnimeController extends Controller
         return Redirect::route('anime.details', $id)->with('error', 'Failed to follow this show. Please try again.');
     }
     
-    public function view(Request $request, $id)
-{
+   
+public function view(Request $request, $id){
+    if (!Auth::check()) {
+        return Redirect::route('anime.details', $id)->with('error', 'You need to log in to record a view.');
+    }
+
     $insertViews = View::create([
         "show_id" => $id,
-        "user_id" => Auth::user()->id, // Correct key here
+        "user_id" => Auth::user()->id,
     ]);
 
     if ($insertViews) {
-        return Redirect::route('anime.details', $id)->with('success', 'View Successfully');
+        return Redirect::route('anime.details', $id)->with('success', 'View successfully recorded.');
     }
 
-    return Redirect::back()->with('error', 'Failed to record view');
+    return Redirect::back()->with('error', 'Failed to record view.');
 }
 
-public function animeWatch($show_id,$episode_name){
+public function animeWatch($show_id, $episode_name){
     $show = Show::find($show_id);
     $episode = Episode::where('episode_name', $episode_name)
         ->where('show_id', $show_id)
         ->firstOrFail();
-    $episodes = Episode::select()->where('show_id',operator: $show_id)->get();
-    $comments = Comment::select()->orderBy('id','desc')->take(8)->where('show_id',$show_id)->get();
+    $episodes = Episode::select()->where('show_id', $show_id)->get();
+    $comments = Comment::select()->orderBy('id', 'desc')->take(8)->where('show_id', $show_id)->get();
 
-
-    return view('shows.anime-watch',compact('show','episode','episodes','comments'));
+    return view('shows.anime-watch', compact('show', 'episode', 'episodes', 'comments'));
 }
 
 public function category($category_name)
