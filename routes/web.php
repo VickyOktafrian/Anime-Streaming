@@ -28,10 +28,11 @@ Route::prefix('users')->group(function () {
 
 Route::get('admin/login',[AdminsController::class,'viewLogin'])->name('view.login');
 Route::post('admin/login',[AdminsController::class,'checkLogin'])->name('check.login');
-Route::get('admin/index',[AdminsController::class,'index'])->name('admins.dashboard');
-use Illuminate\Support\Facades\Auth;
 
-Route::post('logout', function () {
-    Auth::logout();
-    return redirect()->route('view.login');
-})->name('logout');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
+    Route::get('/index', [AdminsController::class, 'index'])->name('admins.dashboard');
+});
+Route::post('admin/logout', [AdminsController::class, 'logout'])->name('admins.logout');
+
+
+

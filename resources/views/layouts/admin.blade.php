@@ -24,7 +24,7 @@
         @auth('admin')
         <ul class="navbar-nav side-nav" >
           <li class="nav-item">
-            <a class="nav-link" style="margin-left: 20px;" href="index.html">Home
+            <a class="nav-link" style="margin-left: 20px;" href="{{ route('admins.dashboard') }}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -45,7 +45,7 @@
         <ul class="navbar-nav ml-md-auto d-md-flex">
             @auth('admin')
             <li class="nav-item">
-                <a class="nav-link" href="index.html">Home
+                <a class="nav-link" href="{{ route('admins.dashboard') }}">Home
                   <span class="sr-only">(current)</span>
                 </a>
               </li>
@@ -55,10 +55,10 @@
                   {{ Auth::guard('admin')->user()->name }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="dropdown-item" href="{{ route('admins.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    <form id="logout-form" action="{{ route('admins.logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                     
@@ -67,7 +67,7 @@
 
               @else
               <li class="nav-item">
-                <a class="nav-link" href="admins/login-admins.html">login
+                <a class="nav-link" href="{{ route('view.login') }}">login
                 </a>
               </li>
 
