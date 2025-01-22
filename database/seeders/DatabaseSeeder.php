@@ -3,17 +3,25 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Show\Show;
+use App\Models\Admins\Admins;
 use Faker\Factory as Faker;
 use App\Models\Comment\Comment;
 use App\Models\Episode\Episode;
 use Illuminate\Database\Seeder;
 use App\Models\Category\Category;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        DB::table('admins')->insert([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password123'), 
+        ]);
+
         // Membuat instance Faker
         $faker = Faker::create();
 

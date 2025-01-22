@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admins\AdminsController;
 
 // Route untuk halaman utama
 
@@ -24,3 +25,13 @@ Route::prefix('shows')->group(function () {
 Route::prefix('users')->group(function () {
     Route::get('followed-shows', [App\Http\Controllers\Users\UsersController::class, 'followedShows'])->name('users.followed.shows')->middleware('auth:web');
 });
+
+Route::get('admin/login',[AdminsController::class,'viewLogin'])->name('view.login');
+Route::post('admin/login',[AdminsController::class,'checkLogin'])->name('check.login');
+Route::get('admin/index',[AdminsController::class,'index'])->name('admins.dashboard');
+use Illuminate\Support\Facades\Auth;
+
+Route::post('logout', function () {
+    Auth::logout();
+    return redirect()->route('view.login');
+})->name('logout');
