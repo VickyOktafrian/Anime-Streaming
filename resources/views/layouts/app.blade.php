@@ -62,55 +62,56 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-2">
-                    <div class="header__right">
-                        <ul>
-                            @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" style="margin-right: 100px" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-                            {{-- @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif --}}
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-                        
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    {{-- <a class="dropdown-item" href="{{ route('profile.show') }}">
-                                        {{ __('Profile') }}
-                                    </a> --}}
-                                    <a class="dropdown-item" href="{{ route('users.followed.shows') }}"
-                                      > Your Followed Shows
+                    <div class="col-lg-2">
+                        <div class="header__right">
+                            <ul>
+                                @guest
+                                @if (Route::has('login'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" style="margin-right: 100px" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
+                                {{-- @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif --}}
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
+                            
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        {{-- <a class="dropdown-item" href="{{ route('profile.show') }}">
+                                            {{ __('Profile') }}
+                                        </a> --}}
+                                        <a class="dropdown-item" href="{{ route('users.followed.shows') }}"
+                                        > Your Followed Shows
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                            
                         
+                        
+                            <form method='post' action="{{ route('anime.search.shows') }}" class="form-inline my-2 my-lg-0">
+                                @csrf
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='show'>
+                            </form>
+                            
+                            {{-- <a href="#" class="search-switch"><span class="icon_search"></span></a> --}}
+                            {{-- <a href="./login.html"><span class="icon_profile"></span></a> --}}
                         </ul>
-                       
-                        <form method='post' action="{{ route('anime.search.shows') }}" class="form-inline my-2 my-lg-0">
-                            @csrf
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='show'>
-                          </form>
-                          
-                        {{-- <a href="#" class="search-switch"><span class="icon_search"></span></a> --}}
-                        {{-- <a href="./login.html"><span class="icon_profile"></span></a> --}}
+                        </div>
                     </div>
-                </div>
             </div>
             <div id="mobile-menu-wrap"></div>
         </div>
