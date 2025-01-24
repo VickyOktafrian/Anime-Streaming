@@ -7,7 +7,7 @@
     <div class="container">
         <div class="hero__slider owl-carousel border border-white">
             @foreach ($shows as $show)
-                <div class="hero__items set-bg" data-setbg="{{ asset('assets/img/hero/' . $show->image) }}">
+                <div class="hero__items set-bg" data-setbg="{{ asset('assets/img/anime/' . $show->image) }}">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
@@ -48,7 +48,7 @@
                             @foreach ($trendingShow as $trending)
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div class="product__item border border-white">
-                                        <div class="product__item__pic set-bg " data-setbg="{{ asset('assets/img/trending/' . $trending->image) }}">
+                                        <div class="product__item__pic set-bg " data-setbg="{{ asset('assets/img/anime/' . $trending->image) }}">
                                         </div>
                                         <div class="product__item__text">
                                             <ul>
@@ -75,7 +75,7 @@
                         @foreach ($foryouShow as $foryou)
                             <div class="product__sidebar__comment__item border border-white">
                                 <div class="product__sidebar__comment__item__pic">
-                                    <img width="70" height="100" src="{{ asset('assets/img/sidebar/' . $foryou->image) }}" alt="">
+                                    <img width="70" height="100" src="{{ asset('assets/img/anime/' . $foryou->image) }}" alt="">
                                 </div>
                                 <div class="product__sidebar__comment__item__text">
                                     <ul>
@@ -110,7 +110,7 @@
                 @foreach ($adventureShow as $adventure)
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item border border-white">
-                            <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/popular/' . $adventure->image) }}">
+                            <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/anime/' . $adventure->image) }}">
                             </div>
                             <div class="product__item__text">
                                 <ul>
@@ -142,7 +142,7 @@
                 @foreach ($recentShow as $recent)
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item border border-white">
-                            <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/recent/' . $recent->image) }}">
+                            <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/anime/' . $recent->image) }}">
                             </div>
                             <div class="product__item__text">
                                 <ul>
@@ -174,7 +174,7 @@
                 @foreach ($liveShow as $live)
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item border border-white">
-                            <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/live/' . $live->image) }}">
+                            <div class="product__item__pic set-bg" data-setbg="{{ asset('assets/img/anime/' . $live->image) }}">
                             </div>
                             <div class="product__item__text">
                                 <ul>

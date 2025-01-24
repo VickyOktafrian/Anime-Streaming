@@ -31,6 +31,19 @@ Route::post('admin/login',[AdminsController::class,'checkLogin'])->name('check.l
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/index', [AdminsController::class, 'index'])->name('admins.dashboard');
+    Route::get('/all-admins', [AdminsController::class, 'allAdmins'])->name('admins.all');
+    Route::get('/create-admins', [AdminsController::class, 'createAdmins'])->name('admins.create');
+    Route::post('/create-admins', [AdminsController::class, 'storeAdmins'])->name('admins.store');
+    
+    
+    Route::get('/all-shows', [AdminsController::class, 'allShows'])->name('shows.all');
+    Route::get('/create-shows', [AdminsController::class, 'createShows'])->name('shows.create');
+    Route::post('/create-shows', [AdminsController::class, 'storeShows'])->name('shows.store');
+    Route::get('/delete-shows/{id}', [AdminsController::class, 'deleteShows'])->name('shows.delete');
+    
+    
+    Route::get('/all-genre', [AdminsController::class, 'allGenre'])->name('genre.all');
+
 });
 Route::post('admin/logout', [AdminsController::class, 'logout'])->name('admins.logout');
 
