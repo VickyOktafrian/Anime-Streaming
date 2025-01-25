@@ -20,7 +20,7 @@
                 
                 
                 <tr>
-                  <th scope="row">{{ $item->id }}</th>
+                  <th scope="row">{{ $loop->iteration }}</th> 
                   <td>{{ $item->name }}</td>
                   <td>{{ $item->email }}</td>
                 @endforeach

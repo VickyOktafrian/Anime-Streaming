@@ -34,7 +34,7 @@
             <tbody>
                 @foreach($shows as $item)
               <tr>
-                <th scope="row">{{ $item->id }}</th>
+                <th scope="row">{{ $loop->iteration }}</th> 
                 <td>{{ $item->name }}</td>
                 <td><img width="60" height="60" src="{{ asset('assets/img/anime/'.  $item->image ) }}" class="border border-black" ></td>
                 <td>{{ $item->type }} </td>

@@ -161,8 +161,35 @@ public function allGenre(){
     
 
 }
+public function createGenre(){
 
+    return view('admins.creategenre');
 
+}
+public function storeGenre(Request $request)
+{
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
+
+    $storeGenre = Category::create([
+        'name' => $validatedData['name'],
+    ]);
+
+    if ($storeGenre) {
+        return Redirect::route('genre.all')->with(['success' => 'Genre Created Successfully']);
+    }
+}
+
+public function deleteGenre($id){
+    $genre = Category::find($id);
+   
+    $genre->delete();
+
+    if ($genre) {
+        return Redirect::route('genre.all')->with(['delete' => 'Show Deleted Successfully']);
+    }
+}
 
     
 

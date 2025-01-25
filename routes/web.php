@@ -43,6 +43,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     
     
     Route::get('/all-genre', [AdminsController::class, 'allGenre'])->name('genre.all');
+    Route::get('/create-genre', [AdminsController::class, 'createGenre'])->name('genre.create');
+    Route::post('/create-genre', [AdminsController::class, 'storeGenre'])->name('genre.store');
+    Route::get('/delete-genre/{id}', [AdminsController::class, 'deleteGenre'])->name('genre.delete');
 
 });
 Route::post('admin/logout', [AdminsController::class, 'logout'])->name('admins.logout');
