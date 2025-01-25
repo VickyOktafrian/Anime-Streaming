@@ -46,7 +46,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
     Route::get('/create-genre', [AdminsController::class, 'createGenre'])->name('genre.create');
     Route::post('/create-genre', [AdminsController::class, 'storeGenre'])->name('genre.store');
     Route::get('/delete-genre/{id}', [AdminsController::class, 'deleteGenre'])->name('genre.delete');
+    
 
+    Route::get('/all-episodes', [AdminsController::class, 'allEpisodes'])->name('episodes.all');
+    Route::get('/create-episodes', [AdminsController::class, 'createEpisodes'])->name('episodes.create');
+    Route::post('/create-episodes', [AdminsController::class, 'storeEpisodes'])->name('episodes.store');
+    Route::get('/delete-episodes/{id}', [AdminsController::class, 'deleteEpisodes'])->name('episodes.delete');
 });
 Route::post('admin/logout', [AdminsController::class, 'logout'])->name('admins.logout');
 
